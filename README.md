@@ -63,10 +63,10 @@ export SERIAL_PORT=COM3
 
 # Start the server
 node server.js
-
-3. Frontend Setup (React)
-The frontend connects to the backend via Socket.io and renders the live map.
 ```
+
+### 3. Frontend Setup (React)
+The frontend connects to the backend via Socket.io and renders the live map.
 
 ```bash
 # Navigate to the frontend directory
