@@ -66,8 +66,9 @@ node server.js
 
 3. Frontend Setup (React)
 The frontend connects to the backend via Socket.io and renders the live map.
+```
 
-Bash
+```bash
 # Navigate to the frontend directory
 cd frontend
 
@@ -77,3 +78,4 @@ npm install socket.io-client
 
 # Start the development server
 npm run dev
+```
