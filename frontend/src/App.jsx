@@ -76,7 +76,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-8 font-sans overflow-hidden">
       <header className="mb-8 flex flex-col items-center">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 drop-shadow-sm">
-          Smart Parking Control
+          Parking Lot Management System
         </h1>
         <div className="flex items-center space-x-3 bg-gray-800/60 px-4 py-2 rounded-full border border-gray-700 backdrop-blur-sm">
           <div className="flex items-center space-x-2">
