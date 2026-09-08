@@ -73,80 +73,81 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8 font-sans overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-8 font-sans overflow-hidden">
       <header className="mb-8 flex flex-col items-center">
-        <h1 className="text-4xl font-bold mb-2">Real-Time Parking Management</h1>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-400">Status:</span>
-          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${connected ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-            {connected ? 'Connected to Server' : 'Disconnected'}
-          </span>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 drop-shadow-sm">
+          Smart Parking Control
+        </h1>
+        <div className="flex items-center space-x-3 bg-gray-800/60 px-4 py-2 rounded-full border border-gray-700 backdrop-blur-sm">
+          <div className="flex items-center space-x-2">
+            <div className={`w-3 h-3 rounded-full animate-pulse ${connected ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]'}`}></div>
+            <span className="text-sm font-medium text-gray-300">
+              {connected ? 'System Online' : 'System Offline'}
+            </span>
+          </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto bg-gray-800 rounded-xl p-8 shadow-2xl relative min-h-[70vh]">
-        <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-700 pb-4 gap-4">
+      <main className="max-w-7xl mx-auto bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-gray-700 relative min-h-[75vh] flex flex-col">
+        <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-gray-700 pb-5 gap-6">
           <div>
-            <h2 className="text-2xl font-semibold mb-2">Interactive Parking Map</h2>
-            <p className="text-sm text-gray-400">Drag and drop spots to arrange them into a custom layout.</p>
+            <h2 className="text-2xl font-bold text-white mb-1">Lot Map Editor</h2>
+            <p className="text-sm text-gray-400">Add spots and drag them onto the asphalt to build your layout.</p>
           </div>
           
-          <div className="flex flex-col gap-4">
-            <div className="flex space-x-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="flex space-x-5 bg-gray-900/50 px-4 py-2 rounded-lg border border-gray-700">
               <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.7)]"></div>
-                <span className="text-sm">Empty (Light)</span>
+                <div className="w-4 h-4 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.8)]"></div>
+                <span className="text-sm font-medium text-gray-300">Empty</span>
               </div>
               <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.7)]"></div>
-                <span className="text-sm">Occupied (No Light)</span>
+                <div className="w-4 h-4 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.8)]"></div>
+                <span className="text-sm font-medium text-gray-300">Occupied</span>
               </div>
             </div>
 
-            <form onSubmit={handleAddSpot} className="flex gap-2">
+            <form onSubmit={handleAddSpot} className="flex gap-2 w-full sm:w-auto">
               <input 
                 type="text" 
-                placeholder="Spot ID (e.g., P1)" 
+                placeholder="Spot ID (e.g. P1)" 
                 value={newSpotId}
                 onChange={(e) => setNewSpotId(e.target.value.toUpperCase())}
-                className="bg-gray-700 border border-gray-600 rounded px-3 py-1 text-sm focus:outline-none focus:border-blue-500"
+                className="bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all w-32 sm:w-40"
               />
-              <button type="submit" className="bg-blue-600 hover:bg-blue-700 rounded px-3 py-1 text-sm transition">
+              <button type="submit" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-lg px-4 py-2 text-sm font-semibold shadow-lg transition-all active:scale-95">
                 Add Spot
               </button>
-              <button type="button" onClick={handleClearMap} className="bg-red-600 hover:bg-red-700 rounded px-3 py-1 text-sm transition">
+              <button type="button" onClick={handleClearMap} className="bg-gray-700 hover:bg-red-600 rounded-lg px-4 py-2 text-sm font-semibold transition-all active:scale-95 text-gray-200 hover:text-white border border-gray-600 hover:border-red-500">
                 Reset Map
               </button>
             </form>
           </div>
         </div>
 
-        <div className="relative w-full h-[600px] bg-gray-900 rounded-lg border border-gray-700 overflow-hidden">
+        <div 
+          className="relative w-full flex-grow min-h-[600px] rounded-xl border-4 border-gray-600 overflow-hidden shadow-inner"
+          style={{
+            backgroundColor: '#2d3748',
+            backgroundImage: `radial-gradient(#4a5568 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        >
           {Object.keys(allSpots).length > 0 ? (
             Object.entries(allSpots).map(([spotId, data]) => {
               // Occupied (car blocks light) -> Red
               // Empty (photodiode receives light) -> Green
+              // Unknown -> Default to Green
               const isOccupied = data.status === 'occupied';
               const isUnknown = data.status === 'unknown';
               
-              let borderColor, bgColor, lightColor, lightShadow;
-
-              if (isUnknown) {
-                borderColor = 'border-gray-500';
-                bgColor = 'bg-gray-500/10';
-                lightColor = 'bg-gray-500';
-                lightShadow = 'shadow-[0_0_12px_rgba(107,114,128,1)]';
-              } else if (isOccupied) {
-                borderColor = 'border-red-500';
-                bgColor = 'bg-red-500/10';
-                lightColor = 'bg-red-500';
-                lightShadow = 'shadow-[0_0_12px_rgba(239,68,68,1)]';
-              } else {
-                borderColor = 'border-green-500';
-                bgColor = 'bg-green-500/10';
-                lightColor = 'bg-green-500';
-                lightShadow = 'shadow-[0_0_12px_rgba(34,197,94,1)]';
-              }
+              // Color logic requested by user: default green, red when occupied
+              const isRed = isOccupied;
+              
+              let borderColor = 'border-white';
+              let bgColor = isRed ? 'bg-red-900/60' : 'bg-gray-800/80';
+              let lightColor = isRed ? 'bg-red-500' : 'bg-green-500';
+              let lightShadow = isRed ? 'shadow-[0_0_18px_rgba(239,68,68,1)]' : 'shadow-[0_0_18px_rgba(34,197,94,1)]';
               
               const position = positions[spotId] || { x: 0, y: 0 };
               const nodeRef = React.createRef();
@@ -162,27 +163,42 @@ function App() {
                   <div 
                     ref={nodeRef}
                     className={`
-                      absolute w-40 h-28 cursor-move select-none flex flex-col items-center justify-center rounded-lg border-2 transition-colors duration-300
-                      ${borderColor} ${bgColor}
+                      absolute w-36 h-48 cursor-move select-none flex flex-col items-center justify-center rounded-sm 
+                      border-l-4 border-r-4 border-b-4 border-t-0 border-dashed border-gray-300
+                      hover:border-solid hover:border-yellow-400 transition-colors duration-200
+                      ${bgColor} backdrop-blur-sm shadow-xl
                     `}
                     style={{ zIndex: 10 }}
                   >
-                    <div className="absolute top-2 right-2">
-                      <div className={`w-3 h-3 rounded-full ${isUnknown ? '' : 'animate-pulse'} ${lightColor} ${lightShadow}`}></div>
+                    {/* Parking Line Marker */}
+                    <div className="absolute top-0 w-full h-1 bg-gray-500/50"></div>
+                    
+                    {/* The Sensor Light */}
+                    <div className="absolute top-4">
+                      <div className={`w-5 h-5 rounded-full border-2 border-gray-800 animate-pulse ${lightColor} ${lightShadow}`}></div>
                     </div>
                     
-                    <span className="text-3xl font-bold mb-1">{spotId}</span>
-                    <span className="text-xs uppercase tracking-wider font-semibold text-gray-400">
-                      {isUnknown ? 'Waiting...' : (isOccupied ? 'Occupied' : 'Empty')}
-                    </span>
-                    <span className="text-[10px] text-gray-500 mt-1">Light: {data.lightValue}</span>
+                    <span className="text-4xl font-extrabold text-white mt-4 drop-shadow-md tracking-tighter">{spotId}</span>
+                    
+                    <div className="mt-auto mb-4 flex flex-col items-center">
+                      <span className={`px-3 py-1 rounded text-[10px] uppercase tracking-widest font-bold ${isRed ? 'bg-red-500/20 text-red-300' : 'bg-green-500/20 text-green-300'}`}>
+                        {isRed ? 'Occupied' : 'Empty'}
+                      </span>
+                      {!isUnknown && (
+                        <span className="text-[10px] text-gray-400 font-mono mt-1 bg-black/40 px-2 py-0.5 rounded">
+                          L: {data.lightValue}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </Draggable>
               );
             })
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
-              No parking spot data available. Add a spot manually or wait for Arduino input...
+            <div className="w-full h-full flex flex-col items-center justify-center text-gray-400/80">
+              <svg className="w-24 h-24 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
+              <p className="text-xl font-medium">Your parking lot is empty</p>
+              <p className="text-sm mt-2">Add a spot to start building your layout</p>
             </div>
           )}
         </div>
