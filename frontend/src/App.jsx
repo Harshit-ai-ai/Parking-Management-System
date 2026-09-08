@@ -91,7 +91,7 @@ function App() {
       <main className="max-w-7xl mx-auto bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-gray-700 relative min-h-[75vh] flex flex-col">
         <div className="mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-gray-700 pb-5 gap-6">
           <div>
-            <h2 className="text-2xl font-bold text-white mb-1">Lot Map Editor</h2>
+            <h2 className="text-2xl font-bold text-white mb-1">Parking Map</h2>
             <p className="text-sm text-gray-400">Add spots and drag them onto the asphalt to build your layout.</p>
           </div>
           
@@ -174,11 +174,9 @@ function App() {
                     <div className="absolute top-0 w-full h-1 bg-gray-500/50"></div>
                     
                     {/* The Sensor Light */}
-                    <div className="absolute top-4">
-                      <div className={`w-5 h-5 rounded-full border-2 border-gray-800 animate-pulse ${lightColor} ${lightShadow}`}></div>
-                    </div>
+                    <div className={`w-10 h-10 mb-2 rounded-full border-4 border-gray-800 animate-pulse ${lightColor} ${lightShadow} z-10`}></div>
                     
-                    <span className="text-4xl font-extrabold text-white mt-4 drop-shadow-md tracking-tighter">{spotId}</span>
+                    <span className="text-4xl font-extrabold text-white drop-shadow-md tracking-tighter z-10">{spotId}</span>
                     
                     <div className="mt-auto mb-4 flex flex-col items-center">
                       <span className={`px-3 py-1 rounded text-[10px] uppercase tracking-widest font-bold ${isRed ? 'bg-red-500/20 text-red-300' : 'bg-green-500/20 text-green-300'}`}>
